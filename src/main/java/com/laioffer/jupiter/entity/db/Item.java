@@ -1,4 +1,4 @@
-package com.laioffer.jupiter.entity.response.db;
+package com.laioffer.jupiter.entity.db;
 
 import com.fasterxml.jackson.annotation.*;
 
@@ -41,6 +41,18 @@ public class Item implements Serializable {
     @Enumerated(value = EnumType.STRING)
     @JsonProperty("item_type")
     private ItemType type;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "itemSet")
+    private Set<User> users = new HashSet<>();
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 
     public String getId() {
         return id;
